@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <limits.h>
 #include <algorithm>
@@ -14,6 +13,7 @@ int searchMax(vector<int> arr)
     }
     return maxi;
 }
+
 int searchMin(vector<int> arr)
 {
     int mini = arr[0], n = arr.size();
@@ -23,34 +23,36 @@ int searchMin(vector<int> arr)
     }
     return mini;
 }
+
 int searchSecondMin(vector<int> arr)
 {
-    int secMin = INT_MAX, mini = INT_MAX, n = arr.size();
+    int mini = INT_MAX, secMin = INT_MAX, n = arr.size();
     for (int i = 0; i < n; i++)
     {
-        if (mini > arr[i])
+        if (arr[i] < mini)
         {
-            secMin = mini;
+            secMin = mini; // Update second min before updating min
             mini = arr[i];
         }
-        if (secMin > arr[i] && arr[i] != mini)
+        else if (arr[i] > mini && arr[i] < secMin)
         {
             secMin = arr[i];
         }
     }
     return secMin;
 }
+
 int searchSecondMax(vector<int> arr)
 {
-    int secMax = -1, maxi = -1, n = arr.size();
+    int maxi = INT_MIN, secMax = INT_MIN, n = arr.size();
     for (int i = 0; i < n; i++)
     {
-        if (maxi < arr[i])
+        if (arr[i] > maxi)
         {
-            secMax = maxi;
+            secMax = maxi; // Update second max before updating max
             maxi = arr[i];
         }
-        if (secMax < arr[i] && arr[i] != maxi)
+        else if (arr[i] < maxi && arr[i] > secMax)
         {
             secMax = arr[i];
         }
